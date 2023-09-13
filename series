@@ -1,0 +1,2 @@
+0001-Add-missing-sycl-include-path.patch
+backport-Guard-removed-typed-pointer-enum-within-version-macro.patch -d ../vc-intrinsics -p1

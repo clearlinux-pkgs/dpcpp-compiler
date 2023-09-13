@@ -1,0 +1,26 @@
+From 496cea13da5d8bcd7d928e237db70a4cc000a8a7 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Fri, 25 Aug 2023 11:12:51 -0700
+Subject: [PATCH] Add missing sycl include path
+
+---
+ sycl/tools/sycl-trace/CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/sycl/tools/sycl-trace/CMakeLists.txt b/sycl/tools/sycl-trace/CMakeLists.txt
+index 902a7f207e27..89abd6de2b43 100644
+--- a/sycl/tools/sycl-trace/CMakeLists.txt
++++ b/sycl/tools/sycl-trace/CMakeLists.txt
+@@ -17,6 +17,9 @@ if ("level_zero" IN_LIST SYCL_ENABLE_PLUGINS)
+   set(EXTRA_TARGETS_TO_INSTALL
+     ze_trace_collector
+   )
++  target_include_directories(ze_trace_collector PRIVATE
++    "${CMAKE_CURRENT_SOURCE_DIR}/../../include"
++  )
+   add_dependencies(sycl-trace ze_trace_collector)
+ endif()
+ 
+-- 
+2.42.0
+
