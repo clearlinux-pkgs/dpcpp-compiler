@@ -1,3 +1,4 @@
+-DLLVM_VERSION_SUFFIX=-dpcpp
 -DBOOST_ASSERT_SOURCE_DIR=%{_builddir}/boost_assert
 -DBOOST_CONFIG_SOURCE_DIR=%{_builddir}/boost_config
 -DBOOST_CONTAINER_HASH_SOURCE_DIR=%{_builddir}/boost_container_hash

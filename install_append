@@ -1,0 +1,41 @@
+# -*- sh -*-
+# remove libomptarget.rtl.amdgpu.so for now
+# it is built using rpath and wants to be in the wrong path
+# rm -f %{buildroot}/usr/lib/libomptarget.rtl.amdgpu.so
+
+# Remove files that should come from the main llvm package
+# rm -rf %{buildroot}/usr/include
+# rm -fr %{buildroot}/usr/lib/libear
+# rm -fr %{buildroot}/usr/lib/libscanbuild
+# rm -fr %{buildroot}/usr/lib/python3.11
+# rm -rf %{buildroot}/usr/lib32/*.a
+# rm -rf %{buildroot}/usr/lib32/*.so
+# rm -rf %{buildroot}/usr/lib32/cmake
+# rm -rf %{buildroot}/usr/lib32/pkgconfig
+# rm -rf %{buildroot}/usr/lib64/*.a
+# rm -rf %{buildroot}/usr/lib64/*.so
+# rm -rf %{buildroot}/usr/lib64/cmake
+# rm -rf %{buildroot}/usr/lib64/pkgconfig
+# rm -rf %{buildroot}/usr/libexec
+# 
+# mv %{buildroot}/usr/share/package-licenses %{buildroot}/usr/
+# rm -rf %{buildroot}/usr/share/*
+# mv %{buildroot}/usr/package-licenses %{buildroot}/usr/share
+
+# Rename the tools to have a versioned suffix and symlink back
+pushd %{buildroot}/usr
+FULL_VERSION=dpcpp-%{version}
+mkdir -p lib64/clang/$FULL_VERSION/bin
+mv bin/* lib64/clang/$FULL_VERSION/bin
+for f in lib64/clang/$FULL_VERSION/bin/*; do
+    case "$f" in
+        *-$VERSION)
+            # Already versioned, leave it alone
+            continue
+            ;;
+    esac
+    ln -s ../$f bin/${f##*/}-dpcpp
+done
+
+# libclang-cpp auto-relocates, so create a symlink so it finds its files
+ln -s ../.. lib64/clang/$FULL_VERSION/lib64
