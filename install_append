@@ -17,7 +17,13 @@
 # rm -rf %{buildroot}/usr/lib64/cmake
 # rm -rf %{buildroot}/usr/lib64/pkgconfig
 # rm -rf %{buildroot}/usr/libexec
-# 
+
+# Remove all the includes *except* those for SYCL
+find %{buildroot}/usr/include '(' -type f -a '!' -ipath '*sycl*' ')' -exec rm {} +
+
+# Cleanup empty directories
+find %{buildroot}/usr/include -type d -empty -exec rmdir {} +
+
 # mv %{buildroot}/usr/share/package-licenses %{buildroot}/usr/
 # rm -rf %{buildroot}/usr/share/*
 # mv %{buildroot}/usr/package-licenses %{buildroot}/usr/share
