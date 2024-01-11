@@ -400,6 +400,10 @@ rm -f %{buildroot}*/usr/include/CL/cl_va_api_media_sharing_intel.h
 rm -f %{buildroot}*/usr/include/CL/cl_version.h
 rm -f %{buildroot}*/usr/include/CL/opencl.h
 rm -f %{buildroot}*/usr/lib64/pkgconfig/OpenCL-Headers.pc
+## hack for dup lib
+rm -f %{buildroot}*/usr/lib64/libur_loader.so.0
+rm -f %{buildroot}*/usr/lib64/libur_loader.so.0.7.0
+
 ## install_append content
 # remove libomptarget.rtl.amdgpu.so for now
 # it is built using rpath and wants to be in the wrong path
@@ -1391,8 +1395,9 @@ ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libur_loader.so.0
-/usr/lib64/libur_loader.so.0.7.0
+/usr/lib/libur_loader.so.0
+/usr/lib/libur_loader.so.0.7.0
+
 
 %files license
 %defattr(0644,root,root,0755)
