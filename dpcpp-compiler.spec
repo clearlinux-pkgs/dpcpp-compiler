@@ -127,6 +127,7 @@ license components for the dpcpp-compiler package.
 %package plugins
 Summary: plugins components for the dpcpp-compiler package.
 Group: Default
+Requires: dpcpp-compiler-lib = %{version}-%{release}
 
 %description plugins
 plugins components for the dpcpp-compiler package.
@@ -1439,5 +1440,3 @@ ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 /usr/lib/libsycl.so.7.0.0-8-gdb.py
 /usr/lib/libur_adapter_level_zero.so.0
 /usr/lib/libur_adapter_level_zero.so.0.0.0
-/usr/lib/libur_loader.so.0
-/usr/lib/libur_loader.so.0.7.0
