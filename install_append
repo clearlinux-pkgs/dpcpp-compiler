@@ -48,6 +48,7 @@ ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 
 # Move shared libraries to proper /usr/lib64
 mv -t lib64/ lib/lib*.so lib/lib*.so.*
+mv -t lib64/ lib/SYCLKernelFusion.so
 
 #/usr
 popd

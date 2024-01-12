@@ -7,7 +7,7 @@
 #
 Name     : dpcpp-compiler
 Version  : 2023.08.31
-Release  : 7
+Release  : 8
 URL      : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source0  : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source1  : https://github.com/KhronosGroup/OpenCL-Headers/archive/v2023.04.17/opencl-headers-2023.04.17.tar.gz
@@ -209,7 +209,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1705083497
+export SOURCE_DATE_EPOCH=1705096204
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -293,7 +293,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1705083497
+export SOURCE_DATE_EPOCH=1705096204
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dpcpp-compiler
 cp %{_builddir}/OpenCL-Headers-2023.04.17/LICENSE %{buildroot}/usr/share/package-licenses/dpcpp-compiler/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
@@ -443,6 +443,7 @@ ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 
 # Move shared libraries to proper /usr/lib64
 mv -t lib64/ lib/lib*.so lib/lib*.so.*
+mv -t lib64/ lib/SYCLKernelFusion.so
 
 #/usr
 popd
@@ -1129,7 +1130,6 @@ popd
 /usr/include/syclcompat/kernel.hpp
 /usr/include/syclcompat/memory.hpp
 /usr/include/syclcompat/syclcompat.hpp
-/usr/lib/SYCLKernelFusion.so
 /usr/lib/clang/18/include/__clang_cuda_builtin_vars.h
 /usr/lib/clang/18/include/__clang_cuda_cmath.h
 /usr/lib/clang/18/include/__clang_cuda_complex_builtins.h
@@ -1369,6 +1369,7 @@ popd
 /usr/lib/cmake/unified-runtime/unified-runtime-config.cmake
 /usr/lib/cmake/unified-runtime/unified-runtime-targets-relwithdebinfo.cmake
 /usr/lib/cmake/unified-runtime/unified-runtime-targets.cmake
+/usr/lib64/SYCLKernelFusion.so
 /usr/lib64/libLTO.so
 /usr/lib64/libRemarks.so
 /usr/lib64/libclang-cpp.so
