@@ -45,3 +45,9 @@ done
 
 # libclang-cpp auto-relocates, so create a symlink so it finds its files
 ln -s ../.. lib64/clang/$FULL_VERSION/lib64
+
+# Remove libs duplicated in /usr/lib64 and /usr/lib for some reason
+rm -f lib/libur_loader.so*
+
+#/usr
+popd
