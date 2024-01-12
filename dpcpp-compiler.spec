@@ -7,7 +7,7 @@
 #
 Name     : dpcpp-compiler
 Version  : 2023.08.31
-Release  : 6
+Release  : 7
 URL      : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source0  : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source1  : https://github.com/KhronosGroup/OpenCL-Headers/archive/v2023.04.17/opencl-headers-2023.04.17.tar.gz
@@ -35,7 +35,6 @@ Requires: dpcpp-compiler-bin = %{version}-%{release}
 Requires: dpcpp-compiler-data = %{version}-%{release}
 Requires: dpcpp-compiler-lib = %{version}-%{release}
 Requires: dpcpp-compiler-license = %{version}-%{release}
-Requires: dpcpp-compiler-plugins = %{version}-%{release}
 BuildRequires : SPIRV-Headers-dev
 BuildRequires : Vulkan-Headers-dev Vulkan-Loader-dev Vulkan-Tools
 BuildRequires : Z3-dev
@@ -127,14 +126,6 @@ Group: Default
 license components for the dpcpp-compiler package.
 
 
-%package plugins
-Summary: plugins components for the dpcpp-compiler package.
-Group: Default
-
-%description plugins
-plugins components for the dpcpp-compiler package.
-
-
 %prep
 %setup -q -n llvm-nightly-2023-08-31
 cd %{_builddir}
@@ -218,7 +209,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1705029756
+export SOURCE_DATE_EPOCH=1705083497
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -302,7 +293,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1705029756
+export SOURCE_DATE_EPOCH=1705083497
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dpcpp-compiler
 cp %{_builddir}/OpenCL-Headers-2023.04.17/LICENSE %{buildroot}/usr/share/package-licenses/dpcpp-compiler/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
@@ -450,8 +441,8 @@ done
 # libclang-cpp auto-relocates, so create a symlink so it finds its files
 ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 
-# Remove libs duplicated in /usr/lib64 and /usr/lib for some reason
-rm -f lib/libur_loader.so*
+# Move shared libraries to proper /usr/lib64
+mv -t lib64/ lib/lib*.so lib/lib*.so.*
 
 #/usr
 popd
@@ -1378,26 +1369,36 @@ popd
 /usr/lib/cmake/unified-runtime/unified-runtime-config.cmake
 /usr/lib/cmake/unified-runtime/unified-runtime-targets-relwithdebinfo.cmake
 /usr/lib/cmake/unified-runtime/unified-runtime-targets.cmake
-/usr/lib/libLTO.so
-/usr/lib/libRemarks.so
-/usr/lib/libclang-cpp.so
-/usr/lib/libclang.so
-/usr/lib/libpi_level_zero.so
-/usr/lib/libpi_opencl.so
-/usr/lib/libpi_unified_runtime.so
-/usr/lib/libsycl.so
-/usr/lib/libur_adapter_level_zero.so
-/usr/lib/libxptifw.so
+/usr/lib64/libLTO.so
+/usr/lib64/libRemarks.so
+/usr/lib64/libclang-cpp.so
+/usr/lib64/libclang.so
+/usr/lib64/libpi_level_zero.so
+/usr/lib64/libpi_opencl.so
+/usr/lib64/libpi_unified_runtime.so
+/usr/lib64/libsycl.so
 /usr/lib64/libsycl_pi_trace_collector.so
 /usr/lib64/libsycl_profiler_collector.so
 /usr/lib64/libsycl_sanitizer_collector.so
+/usr/lib64/libur_adapter_level_zero.so
 /usr/lib64/libur_loader.so
+/usr/lib64/libxptifw.so
 /usr/lib64/libze_trace_collector.so
 /usr/lib64/pkgconfig/LLVMSPIRVLib.pc
 /usr/lib64/pkgconfig/libur_loader.pc
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/libLTO.so.18-dpcpp
+/usr/lib64/libRemarks.so.18-dpcpp
+/usr/lib64/libclang-cpp.so.18-dpcpp
+/usr/lib64/libclang.so.18-dpcpp
+/usr/lib64/libclang.so.18.0.0-dpcpp
+/usr/lib64/libsycl.so.7
+/usr/lib64/libsycl.so.7.0.0-8
+/usr/lib64/libsycl.so.7.0.0-8-gdb.py
+/usr/lib64/libur_adapter_level_zero.so.0
+/usr/lib64/libur_adapter_level_zero.so.0.0.0
 /usr/lib64/libur_loader.so.0
 /usr/lib64/libur_loader.so.0.7.0
 
@@ -1434,16 +1435,3 @@ popd
 /usr/share/package-licenses/dpcpp-compiler/db1f866b29c6a191752c7c5924b7572cdbc47c34
 /usr/share/package-licenses/dpcpp-compiler/e3cccabb67bd491a643d32a7d2b65b49836e626d
 /usr/share/package-licenses/dpcpp-compiler/f4359b9da55a3b9e4d9513eb79cacf125fb49e7b
-
-%files plugins
-%defattr(-,root,root,-)
-/usr/lib/libLTO.so.18-dpcpp
-/usr/lib/libRemarks.so.18-dpcpp
-/usr/lib/libclang-cpp.so.18-dpcpp
-/usr/lib/libclang.so.18-dpcpp
-/usr/lib/libclang.so.18.0.0-dpcpp
-/usr/lib/libsycl.so.7
-/usr/lib/libsycl.so.7.0.0-8
-/usr/lib/libsycl.so.7.0.0-8-gdb.py
-/usr/lib/libur_adapter_level_zero.so.0
-/usr/lib/libur_adapter_level_zero.so.0.0.0
