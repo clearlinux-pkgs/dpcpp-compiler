@@ -7,7 +7,7 @@
 #
 Name     : dpcpp-compiler
 Version  : 2023.08.31
-Release  : 8
+Release  : 9
 URL      : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source0  : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source1  : https://github.com/KhronosGroup/OpenCL-Headers/archive/v2023.04.17/opencl-headers-2023.04.17.tar.gz
@@ -209,7 +209,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1705096204
+export SOURCE_DATE_EPOCH=1705116285
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -293,7 +293,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1705096204
+export SOURCE_DATE_EPOCH=1705116285
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dpcpp-compiler
 cp %{_builddir}/OpenCL-Headers-2023.04.17/LICENSE %{buildroot}/usr/share/package-licenses/dpcpp-compiler/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
@@ -341,6 +341,21 @@ pushd clr-build
 %make_install
 popd
 ## Remove excluded files
+rm -f %{buildroot}*/usr/lib/libLTO.so
+rm -f %{buildroot}*/usr/lib/libRemarks.so
+rm -f %{buildroot}*/usr/lib/libclang-cpp.so
+rm -f %{buildroot}*/usr/lib/libclang.so
+rm -f %{buildroot}*/usr/lib64/libLTO.so
+rm -f %{buildroot}*/usr/lib64/libRemarks.so
+rm -f %{buildroot}*/usr/lib64/libclang-cpp.so
+rm -f %{buildroot}*/usr/lib64/libclang.so
+rm -f %{buildroot}*/usr/lib64/pkgconfig/LLVMSPIRVLib.pc
+rm -f %{buildroot}*/usr/libexec/analyze-c++
+rm -f %{buildroot}*/usr/libexec/analyze-cc
+rm -f %{buildroot}*/usr/libexec/c++-analyzer
+rm -f %{buildroot}*/usr/libexec/ccc-analyzer
+rm -f %{buildroot}*/usr/libexec/intercept-c++
+rm -f %{buildroot}*/usr/libexec/intercept-cc
 rm -f %{buildroot}*/usr/share/clang/bash-autocomplete.sh
 rm -f %{buildroot}*/usr/share/clang/clang-format-bbedit.applescript
 rm -f %{buildroot}*/usr/share/clang/clang-format-diff.py
@@ -349,6 +364,7 @@ rm -f %{buildroot}*/usr/share/clang/clang-format.el
 rm -f %{buildroot}*/usr/share/clang/clang-format.py
 rm -f %{buildroot}*/usr/share/clang/clang-rename.el
 rm -f %{buildroot}*/usr/share/clang/clang-rename.py
+rm -f %{buildroot}*/usr/share/man/man1/scan-build.1
 rm -f %{buildroot}*/usr/share/opt-viewer/opt-diff.py
 rm -f %{buildroot}*/usr/share/opt-viewer/opt-stats.py
 rm -f %{buildroot}*/usr/share/opt-viewer/opt-viewer.py
@@ -361,21 +377,13 @@ rm -f %{buildroot}*/usr/share/scan-view/Reporter.py
 rm -f %{buildroot}*/usr/share/scan-view/ScanView.py
 rm -f %{buildroot}*/usr/share/scan-view/bugcatcher.ico
 rm -f %{buildroot}*/usr/share/scan-view/startfile.py
-rm -f %{buildroot}*/usr/libexec/analyze-c++
-rm -f %{buildroot}*/usr/libexec/analyze-cc
-rm -f %{buildroot}*/usr/libexec/c++-analyzer
-rm -f %{buildroot}*/usr/libexec/ccc-analyzer
-rm -f %{buildroot}*/usr/libexec/intercept-c++
-rm -f %{buildroot}*/usr/libexec/intercept-cc
-rm -f %{buildroot}*/usr/share/man/man1/scan-build.1
 rm -f %{buildroot}*/usr/lib64/libOpenCL.so
 rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1
-rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1.2
-rm -f %{buildroot}*/usr/lib64/pkgconfig/OpenCL.pc
 rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1
 rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1.2
+rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1.2
+rm -f %{buildroot}*/usr/lib64/pkgconfig/OpenCL.pc
 rm -f %{buildroot}*/usr/include/CL/cl.h
-rm -f %{buildroot}*/usr/include/CL/cl_half.h
 rm -f %{buildroot}*/usr/include/CL/cl_d3d10.h
 rm -f %{buildroot}*/usr/include/CL/cl_d3d11.h
 rm -f %{buildroot}*/usr/include/CL/cl_dx9_media_sharing.h
@@ -386,6 +394,7 @@ rm -f %{buildroot}*/usr/include/CL/cl_ext_intel.h
 rm -f %{buildroot}*/usr/include/CL/cl_gl.h
 rm -f %{buildroot}*/usr/include/CL/cl_gl_ext.h
 rm -f %{buildroot}*/usr/include/CL/cl_half.h
+rm -f %{buildroot}*/usr/include/CL/cl_half.h
 rm -f %{buildroot}*/usr/include/CL/cl_icd.h
 rm -f %{buildroot}*/usr/include/CL/cl_layer.h
 rm -f %{buildroot}*/usr/include/CL/cl_platform.h
@@ -393,6 +402,9 @@ rm -f %{buildroot}*/usr/include/CL/cl_va_api_media_sharing_intel.h
 rm -f %{buildroot}*/usr/include/CL/cl_version.h
 rm -f %{buildroot}*/usr/include/CL/opencl.h
 rm -f %{buildroot}*/usr/lib64/pkgconfig/OpenCL-Headers.pc
+rm -f %{buildroot}*/usr/share/cmake/OpenCLHeaders/OpenCLHeadersConfig.cmake
+rm -f %{buildroot}*/usr/share/cmake/OpenCLHeaders/OpenCLHeadersConfigVersion.cmake
+rm -f %{buildroot}*/usr/share/cmake/OpenCLHeaders/OpenCLHeadersTargets.cmake
 ## install_append content
 # remove libomptarget.rtl.amdgpu.so for now
 # it is built using rpath and wants to be in the wrong path
@@ -442,8 +454,7 @@ done
 ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 
 # Move shared libraries to proper /usr/lib64
-mv -t lib64/ lib/lib*.so lib/lib*.so.*
-mv -t lib64/ lib/SYCLKernelFusion.so
+mv -t lib64/ lib/*.so lib/lib*.so.*
 
 #/usr
 popd
@@ -1370,10 +1381,6 @@ popd
 /usr/lib/cmake/unified-runtime/unified-runtime-targets-relwithdebinfo.cmake
 /usr/lib/cmake/unified-runtime/unified-runtime-targets.cmake
 /usr/lib64/SYCLKernelFusion.so
-/usr/lib64/libLTO.so
-/usr/lib64/libRemarks.so
-/usr/lib64/libclang-cpp.so
-/usr/lib64/libclang.so
 /usr/lib64/libpi_level_zero.so
 /usr/lib64/libpi_opencl.so
 /usr/lib64/libpi_unified_runtime.so
@@ -1385,7 +1392,6 @@ popd
 /usr/lib64/libur_loader.so
 /usr/lib64/libxptifw.so
 /usr/lib64/libze_trace_collector.so
-/usr/lib64/pkgconfig/LLVMSPIRVLib.pc
 /usr/lib64/pkgconfig/libur_loader.pc
 
 %files lib

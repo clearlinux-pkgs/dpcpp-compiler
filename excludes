@@ -1,15 +1,22 @@
 # This file contains the output files that need %exclude. Full path
 # names, one per line.
 
-# bash-completion-data
-
-# gtk-doc-data
-
-# libsolv-data
-
-# libtorrent-rasterbar-data
-
-# llvm-data
+# llvm
+/usr/lib/libLTO.so
+/usr/lib/libRemarks.so
+/usr/lib/libclang-cpp.so
+/usr/lib/libclang.so
+/usr/lib64/libLTO.so
+/usr/lib64/libRemarks.so
+/usr/lib64/libclang-cpp.so
+/usr/lib64/libclang.so
+/usr/lib64/pkgconfig/LLVMSPIRVLib.pc
+/usr/libexec/analyze-c++
+/usr/libexec/analyze-cc
+/usr/libexec/c++-analyzer
+/usr/libexec/ccc-analyzer
+/usr/libexec/intercept-c++
+/usr/libexec/intercept-cc
 /usr/share/clang/bash-autocomplete.sh
 /usr/share/clang/clang-format-bbedit.applescript
 /usr/share/clang/clang-format-diff.py
@@ -18,6 +25,7 @@
 /usr/share/clang/clang-format.py
 /usr/share/clang/clang-rename.el
 /usr/share/clang/clang-rename.py
+/usr/share/man/man1/scan-build.1
 /usr/share/opt-viewer/opt-diff.py
 /usr/share/opt-viewer/opt-stats.py
 /usr/share/opt-viewer/opt-viewer.py
@@ -31,34 +39,16 @@
 /usr/share/scan-view/bugcatcher.ico
 /usr/share/scan-view/startfile.py
 
-# llvm-dev
-
-# llvm-libexec
-/usr/libexec/analyze-c++
-/usr/libexec/analyze-cc
-/usr/libexec/c++-analyzer
-/usr/libexec/ccc-analyzer
-/usr/libexec/intercept-c++
-/usr/libexec/intercept-cc
-
-# llvm-man
-/usr/share/man/man1/scan-build.1
-
-# ocl-icd-dev
+# ocl-icd
 /usr/lib64/libOpenCL.so
 /usr/lib64/libOpenCL.so.1
+/usr/lib64/libOpenCL.so.1
+/usr/lib64/libOpenCL.so.1.2
 /usr/lib64/libOpenCL.so.1.2
 /usr/lib64/pkgconfig/OpenCL.pc
 
-# ocl-icd-lib
-/usr/lib64/libOpenCL.so.1
-/usr/lib64/libOpenCL.so.1.2
-
-# opencl-headers-data
-
-# opencl-headers-dev
+# opencl-headers
 /usr/include/CL/cl.h
-/usr/include/CL/cl_half.h
 /usr/include/CL/cl_d3d10.h
 /usr/include/CL/cl_d3d11.h
 /usr/include/CL/cl_dx9_media_sharing.h
@@ -69,6 +59,7 @@
 /usr/include/CL/cl_gl.h
 /usr/include/CL/cl_gl_ext.h
 /usr/include/CL/cl_half.h
+/usr/include/CL/cl_half.h
 /usr/include/CL/cl_icd.h
 /usr/include/CL/cl_layer.h
 /usr/include/CL/cl_platform.h
@@ -76,7 +67,6 @@
 /usr/include/CL/cl_version.h
 /usr/include/CL/opencl.h
 /usr/lib64/pkgconfig/OpenCL-Headers.pc
-
-# OpenColorIO-data
-
-# Vulkan-Headers-data
+/usr/share/cmake/OpenCLHeaders/OpenCLHeadersConfig.cmake
+/usr/share/cmake/OpenCLHeaders/OpenCLHeadersConfigVersion.cmake
+/usr/share/cmake/OpenCLHeaders/OpenCLHeadersTargets.cmake
