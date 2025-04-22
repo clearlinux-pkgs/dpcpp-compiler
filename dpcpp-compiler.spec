@@ -7,7 +7,7 @@
 #
 Name     : dpcpp-compiler
 Version  : 2023.08.31
-Release  : 13
+Release  : 14
 URL      : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source0  : https://github.com/intel/llvm/archive/nightly-2023-08-31/llvm-nightly-2023-08-31.tar.gz
 Source1  : https://github.com/KhronosGroup/OpenCL-Headers/archive/v2023.04.17/opencl-headers-2023.04.17.tar.gz
