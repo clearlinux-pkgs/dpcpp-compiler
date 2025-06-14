@@ -1,4 +1,0 @@
-CPLUS_INCLUDE_PATH="/usr/include/c++/13:/usr/include/c++/13/x86_64-generic-linux/"
-all
-libsycldevice-spv
-libsycldevice-obj

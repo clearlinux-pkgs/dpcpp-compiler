@@ -5,9 +5,7 @@
 
 # Remove files that should come from the main llvm package
 # rm -rf %{buildroot}/usr/include
-# rm -fr %{buildroot}/usr/lib/libear
-# rm -fr %{buildroot}/usr/lib/libscanbuild
-# rm -fr %{buildroot}/usr/lib/python3.11
+# rm -rf %{buildroot}/usr/lib/python3.11
 # rm -rf %{buildroot}/usr/lib32/*.a
 # rm -rf %{buildroot}/usr/lib32/*.so
 # rm -rf %{buildroot}/usr/lib32/cmake
@@ -17,6 +15,10 @@
 # rm -rf %{buildroot}/usr/lib64/cmake
 # rm -rf %{buildroot}/usr/lib64/pkgconfig
 # rm -rf %{buildroot}/usr/libexec
+
+# Remove things we shouldn't be providing in the first place
+rm -rf %{buildroot}/usr/lib/libear
+rm -rf %{buildroot}/usr/lib/libscanbuild
 
 # Remove all the includes *except* those for SYCL
 find %{buildroot}/usr/include '(' -type f -a '!' -ipath '*sycl*' ')' -exec rm {} +
@@ -30,10 +32,10 @@ find %{buildroot}/usr/include -type d -empty -exec rmdir {} +
 
 # Rename the tools to have a versioned suffix and symlink back
 pushd %{buildroot}/usr
-FULL_VERSION=dpcpp-%{version}
-mkdir -p lib64/clang/$FULL_VERSION/bin
-mv bin/* lib64/clang/$FULL_VERSION/bin
-for f in lib64/clang/$FULL_VERSION/bin/*; do
+VARIANT_TAG=dpcpp
+mkdir -p lib64/clang/$VARIANT_TAG/bin
+mv bin/* lib64/clang/$VARIANT_TAG/bin
+for f in lib64/clang/$VARIANT_TAG/bin/*; do
     case "$f" in
         *-$VERSION)
             # Already versioned, leave it alone
@@ -44,10 +46,7 @@ for f in lib64/clang/$FULL_VERSION/bin/*; do
 done
 
 # libclang-cpp auto-relocates, so create a symlink so it finds its files
-ln -s ../.. lib64/clang/$FULL_VERSION/lib64
-
-# Move shared libraries to proper /usr/lib64
-mv -t lib64/ lib/*.so lib/lib*.so.*
+ln -s ../.. lib64/clang/$VARIANT_TAG/lib64
 
 #/usr
 popd

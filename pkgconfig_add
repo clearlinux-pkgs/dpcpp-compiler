@@ -4,3 +4,4 @@ OpenCL-Headers
 SPIRV-Headers
 SPIRV-Tools
 level-zero
+shaderc

@@ -1,8 +1,13 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
 SPIRV-Headers-dev
+boost-dev
 cmake
 gcc-staticdev
+glslang
 level-zero-dev
+libbacktrace-staticdev
 llvm-bin
 ninja
+unified-memory-framework-dev
+vc-intrinsics-staticdev
