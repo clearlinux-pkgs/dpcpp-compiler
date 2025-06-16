@@ -2,10 +2,15 @@
 # names, one per line.
 
 # llvm
+/usr/include/clang/AST/SYCLKernelInfo.h
+/usr/include/clang/AST/StmtSYCL.h
+/usr/include/clang/Sema/SemaSYCL.h
 /usr/lib/libLTO.so
 /usr/lib/libRemarks.so
 /usr/lib/libclang-cpp.so
 /usr/lib/libclang.so
+/usr/lib64/cmake/clang/*
+/usr/lib64/cmake/llvm/*
 /usr/lib64/libLTO.so
 /usr/lib64/libRemarks.so
 /usr/lib64/libclang-cpp.so

@@ -7,7 +7,7 @@
 #
 Name     : dpcpp-compiler
 Version  : 2025.06.06
-Release  : 16
+Release  : 17
 URL      : https://github.com/intel/llvm/archive/nightly-2025-06-06/llvm-2025-06-06.tar.gz
 Source0  : https://github.com/intel/llvm/archive/nightly-2025-06-06/llvm-2025-06-06.tar.gz
 Source1  : https://github.com/KhronosGroup/OpenCL-Headers/archive/v2024.10.24/OpenCL-Headers-2024.10.24.tar.gz
@@ -155,7 +155,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1750098788
+export SOURCE_DATE_EPOCH=1750109229
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -222,7 +222,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1750098788
+export SOURCE_DATE_EPOCH=1750109229
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dpcpp-compiler
 cp %{_builddir}/OpenCL-Headers-2024.10.24/LICENSE %{buildroot}/usr/share/package-licenses/dpcpp-compiler/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
@@ -301,10 +301,15 @@ pushd clr-build
 %ninja_install
 popd
 ## Remove excluded files
+rm -f %{buildroot}*/usr/include/clang/AST/SYCLKernelInfo.h
+rm -f %{buildroot}*/usr/include/clang/AST/StmtSYCL.h
+rm -f %{buildroot}*/usr/include/clang/Sema/SemaSYCL.h
 rm -f %{buildroot}*/usr/lib/libLTO.so
 rm -f %{buildroot}*/usr/lib/libRemarks.so
 rm -f %{buildroot}*/usr/lib/libclang-cpp.so
 rm -f %{buildroot}*/usr/lib/libclang.so
+rm -f %{buildroot}*/usr/lib64/cmake/clang/*
+rm -f %{buildroot}*/usr/lib64/cmake/llvm/*
 rm -f %{buildroot}*/usr/lib64/libLTO.so
 rm -f %{buildroot}*/usr/lib64/libRemarks.so
 rm -f %{buildroot}*/usr/lib64/libclang-cpp.so
@@ -806,9 +811,6 @@ popd
 %files dev
 %defattr(-,root,root,-)
 /usr/include/CL/sycl.hpp
-/usr/include/clang/AST/SYCLKernelInfo.h
-/usr/include/clang/AST/StmtSYCL.h
-/usr/include/clang/Sema/SemaSYCL.h
 /usr/include/llvm/Frontend/Offloading/SYCLOffloadWrapper.h
 /usr/include/llvm/Object/SYCLBIN.h
 /usr/include/llvm/SYCLLowerIR/CleanupSYCLMetadata.h
@@ -1480,50 +1482,6 @@ popd
 /usr/lib64/clang/21/include/xtestintrin.h
 /usr/lib64/clang/21/include/yvals_core.h
 /usr/lib64/clang/21/include/zos_wrappers/builtins.h
-/usr/lib64/cmake/clang/AddClang.cmake
-/usr/lib64/cmake/clang/ClangConfig.cmake
-/usr/lib64/cmake/clang/ClangConfigVersion.cmake
-/usr/lib64/cmake/clang/ClangTargets-relwithdebinfo.cmake
-/usr/lib64/cmake/clang/ClangTargets.cmake
-/usr/lib64/cmake/llvm/AddLLVM.cmake
-/usr/lib64/cmake/llvm/AddOCaml.cmake
-/usr/lib64/cmake/llvm/AddSecurityFlags.cmake
-/usr/lib64/cmake/llvm/AddSphinxTarget.cmake
-/usr/lib64/cmake/llvm/CheckAtomic.cmake
-/usr/lib64/cmake/llvm/CheckCompilerVersion.cmake
-/usr/lib64/cmake/llvm/CheckProblematicConfigurations.cmake
-/usr/lib64/cmake/llvm/CoverageReport.cmake
-/usr/lib64/cmake/llvm/CrossCompile.cmake
-/usr/lib64/cmake/llvm/DetermineGCCCompatible.cmake
-/usr/lib64/cmake/llvm/FileLock.cmake
-/usr/lib64/cmake/llvm/FindFFI.cmake
-/usr/lib64/cmake/llvm/FindLibEdit.cmake
-/usr/lib64/cmake/llvm/FindLibpfm.cmake
-/usr/lib64/cmake/llvm/FindOCaml.cmake
-/usr/lib64/cmake/llvm/FindSphinx.cmake
-/usr/lib64/cmake/llvm/FindZ3.cmake
-/usr/lib64/cmake/llvm/Findzstd.cmake
-/usr/lib64/cmake/llvm/GenerateVersionFromVCS.cmake
-/usr/lib64/cmake/llvm/GetErrcMessages.cmake
-/usr/lib64/cmake/llvm/GetLibraryName.cmake
-/usr/lib64/cmake/llvm/HandleLLVMOptions.cmake
-/usr/lib64/cmake/llvm/HandleLLVMStdlib.cmake
-/usr/lib64/cmake/llvm/LLVM-Build.cmake
-/usr/lib64/cmake/llvm/LLVM-Config.cmake
-/usr/lib64/cmake/llvm/LLVMConfig.cmake
-/usr/lib64/cmake/llvm/LLVMConfigExtensions.cmake
-/usr/lib64/cmake/llvm/LLVMConfigVersion.cmake
-/usr/lib64/cmake/llvm/LLVMDistributionSupport.cmake
-/usr/lib64/cmake/llvm/LLVMExports-relwithdebinfo.cmake
-/usr/lib64/cmake/llvm/LLVMExports.cmake
-/usr/lib64/cmake/llvm/LLVMExternalProjectUtils.cmake
-/usr/lib64/cmake/llvm/LLVMInstallSymlink.cmake
-/usr/lib64/cmake/llvm/LLVMProcessSources.cmake
-/usr/lib64/cmake/llvm/TableGen.cmake
-/usr/lib64/cmake/llvm/TensorFlowCompile.cmake
-/usr/lib64/cmake/llvm/UseLibtool.cmake
-/usr/lib64/cmake/llvm/VersionFromVCS.cmake
-/usr/lib64/cmake/llvm/llvm-driver-template.cpp.in
 /usr/lib64/libsycl-preview.so
 /usr/lib64/libsycl.so
 /usr/lib64/libur_adapter_level_zero.so
