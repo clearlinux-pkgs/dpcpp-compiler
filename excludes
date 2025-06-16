@@ -40,11 +40,8 @@
 /usr/share/scan-view/startfile.py
 
 # ocl-icd
-/usr/lib64/libOpenCL.so
-/usr/lib64/libOpenCL.so.1
-/usr/lib64/libOpenCL.so.1
-/usr/lib64/libOpenCL.so.1.2
-/usr/lib64/libOpenCL.so.1.2
+
+/usr/lib64/libOpenCL.so*
 /usr/lib64/pkgconfig/OpenCL.pc
 
 # opencl-headers

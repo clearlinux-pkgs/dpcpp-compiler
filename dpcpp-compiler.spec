@@ -7,7 +7,7 @@
 #
 Name     : dpcpp-compiler
 Version  : 2025.06.06
-Release  : 15
+Release  : 16
 URL      : https://github.com/intel/llvm/archive/nightly-2025-06-06/llvm-2025-06-06.tar.gz
 Source0  : https://github.com/intel/llvm/archive/nightly-2025-06-06/llvm-2025-06-06.tar.gz
 Source1  : https://github.com/KhronosGroup/OpenCL-Headers/archive/v2024.10.24/OpenCL-Headers-2024.10.24.tar.gz
@@ -155,7 +155,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1749861902
+export SOURCE_DATE_EPOCH=1750098788
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -222,7 +222,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1749861902
+export SOURCE_DATE_EPOCH=1750098788
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dpcpp-compiler
 cp %{_builddir}/OpenCL-Headers-2024.10.24/LICENSE %{buildroot}/usr/share/package-licenses/dpcpp-compiler/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
@@ -337,11 +337,7 @@ rm -f %{buildroot}*/usr/share/scan-view/Reporter.py
 rm -f %{buildroot}*/usr/share/scan-view/ScanView.py
 rm -f %{buildroot}*/usr/share/scan-view/bugcatcher.ico
 rm -f %{buildroot}*/usr/share/scan-view/startfile.py
-rm -f %{buildroot}*/usr/lib64/libOpenCL.so
-rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1
-rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1
-rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1.2
-rm -f %{buildroot}*/usr/lib64/libOpenCL.so.1.2
+rm -f %{buildroot}*/usr/lib64/libOpenCL.so*
 rm -f %{buildroot}*/usr/lib64/pkgconfig/OpenCL.pc
 rm -f %{buildroot}*/usr/include/CL/cl.h
 rm -f %{buildroot}*/usr/include/CL/cl_d3d10.h
@@ -1538,7 +1534,6 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libLTO.so.21.0-dpcpp
-/usr/lib64/libOpenCL.so.1.0.0
 /usr/lib64/libRemarks.so.21.0-dpcpp
 /usr/lib64/libclang-cpp.so.21.0-dpcpp
 /usr/lib64/libclang.so.21.0-dpcpp
